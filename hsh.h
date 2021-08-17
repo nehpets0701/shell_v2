@@ -19,7 +19,7 @@ int _strcmp(char *s1, char *s2);
 unsigned int _strlen(char *p);
 char *_strcpy(char *src, char *dest);
 int printPrompt(void);
-int handleBuiltins(char **subInputs, int num, char **env, char *input);
+int builtins(char **s, int n, char **e, char *i, char **a, char **h, int hi);
 void sigint (int sig);
 int executeProg(char **subInputs, char **env);
 void execute(char *adress, char **input, char **env);
@@ -28,6 +28,12 @@ char *catcmd(char *path, char *cmd);
 void free_double(char **dptr);
 char *_strdup(char *dest, char *src);
 void printEnv(char **env);
-void cd(char **subInputs, char **env);
+void cd(char **subInputs, char **env, char **argv, int num);
+char *_strcat(char *dest, char *src);
+void _setenv(char **subInputs);
+void _unsetenv(char **subInputs);
+void printHistory(char **history, int historyInt);
+
+extern char **environ;
 
 #endif

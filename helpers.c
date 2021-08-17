@@ -78,20 +78,16 @@ unsigned int _strlen(char *p)
 
 char **_strtok(char *s, char *delim)
 {
-	char **tok;
-	char *str;
+	char *str, **tok;
 	int i = 1, index = 0;
 
 	if (s == NULL)
 		return (NULL);
-
-	while (s[index])
+	for (; s[index]; index++)
 	{
 		if (s[index] == *delim)
 			i++;
-		index++;
 	}
-
 	tok = malloc(sizeof(char *) * (i + 1));
 	if (tok == NULL)
 	{
@@ -99,7 +95,6 @@ char **_strtok(char *s, char *delim)
 		return (NULL);
 	}
 	tok[i] = NULL;
-
 	i = 0;
 	str = strtok(s, delim);
 	while (1)
@@ -109,12 +104,8 @@ char **_strtok(char *s, char *delim)
 		tok[i] = malloc(sizeof(char) * _strlen(str) + 1);
 		if (tok[i] == NULL)
 		{
-			i = 0;
-			while (tok[i] != NULL)
-			{
+			for (i = 0; tok[i] != NULL; i++)
 				free(tok[i]);
-				i++;
-			}
 			free(tok[i]);
 			free(str);
 			free(tok);
@@ -125,13 +116,6 @@ char **_strtok(char *s, char *delim)
 		str = strtok(NULL, delim);
 	}
 	tok[i] = NULL;
-	/*i = 0;
-	while (tok[i] != NULL)
-	{
-		free(tok[i]);
-		i++;
-	}
-	free(tok);*/
 	free(str);
 	return (tok);
 }
